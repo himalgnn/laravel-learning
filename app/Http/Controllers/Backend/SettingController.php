@@ -25,7 +25,12 @@ class SettingController extends Controller
         //
        $setting = Setting::first();
         if($setting){
-            return redirect()->route('backend.setting.edit',$setting->id);
+        
+            // return redirect()->route('backend.setting.edit', $setting->id);
+            return view('backend.setting.edit', [
+                'setting' => $setting
+            ]);
+
         } else {
             return view('backend.setting.create');
         }
@@ -85,6 +90,10 @@ class SettingController extends Controller
     public function edit(string $id)
     {
         //
+        return view('backend.setting.edit', [
+            'setting' => Setting::findOrFail($id)
+        ]);
+
     }
 
     /**
@@ -93,6 +102,13 @@ class SettingController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $setting = Setting::findOrFail($id);
+        $setting->update($request->all());
+        if($setting){
+            return redirect()->route('backend.setting.edit', $id)->with('success','Setting Update Success!!!');
+        } else {
+            return redirect()->route('backend.setting.edit', $id)->with('error','Setting Update Failed!!!');
+        }
     }
 
     /**

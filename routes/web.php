@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\SettingController;
 use Illuminate\Support\Facades\Route;
@@ -37,9 +38,14 @@ Route::prefix('backend/')->name('backend.')->group(function (){
     ]);
 });
 
-Route::get('/backend/category/create', function () {
-    return view('backend.category.create');
+
+Route::get('/backend/category/trash', [CategoryController::class, 'showTrash'])->name('backend.category.trash');
+
+
+Route::prefix('backend/')->name('backend.')->group(function (){
+    Route::resource('category', CategoryController::class)->only([
+        'index','create', 'store', 'update', 'edit', 'destroy', 'show', 
+    ]);
 });
-Route::get('/backend/category', function () {
-    return view('backend.category.index');
-});
+
+

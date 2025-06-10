@@ -273,16 +273,16 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('backend.category.create') }}" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
                   <p>
                     Categories
-                    <i class="nav-arrow bi bi-chevron-right"></i>
-                    <span class="nav-badge badge text-bg-secondary me-3">6</span>
+                    <!-- <i class="nav-arrow bi bi-chevron-right"></i>
+                    <span class="nav-badge badge text-bg-secondary me-3">6</span> -->
 
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
+                <!-- <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="./widgets/small-box.html" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
@@ -301,7 +301,7 @@
                       <p>Cards</p>
                     </a>
                   </li>
-                </ul>
+                </ul> -->
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
