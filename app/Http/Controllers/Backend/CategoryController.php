@@ -59,6 +59,9 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
+        $panel = 'Category';
+        $record = Category::findOrFail($category->id);
+        return view('backend.category.edit', compact('panel', 'record'));
     }
 
     /**
@@ -67,6 +70,12 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
+        $request->request->add(['updated_by' => auth()->user()->id]);
+        if ($category->update($request->all())) {
+            return redirect()->route('backend.category.index')->with('success', 'Category updated successfully.');
+        } else {
+            return redirect()->route('backend.category.index')->with('error', 'Failed to update category.');
+        }
     }
 
     /**
@@ -75,11 +84,37 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+       
+        if( ($category -> status = 'Inactive') && $category->delete()){
+            return redirect()->route('backend.category.index')->with('success', 'Category Trashed successfully.');
+        } else {
+            return redirect()->route('backend.category.index')->with('error', 'Failed to trash category.');
+        }
     }
 
     public function showTrash(){
-        $panel = 'Category Trash';
+        $panel = 'Category';
         $records = Category::onlyTrashed()->get();
         return view('backend.category.trash', compact('panel','records'));
+    }
+
+    public function deleteTrash($id)
+    {
+        $category = Category::withTrashed()->findOrFail($id);
+        if ($category->forceDelete()) {
+            return redirect()->route('backend.category.trash')->with('success', 'Category deleted permanently.');
+        } else {
+            return redirect()->route('backend.category.trash')->with('error', 'Failed to delete category permanently.');
+        }
+    }
+
+    public function restoreTrash($id)
+    {
+        $category = Category::withTrashed()->findOrFail($id);
+        if ($category->restore()) {
+            return redirect()->route('backend.category.trash')->with('success', 'Category restored successfully.');
+        } else {
+            return redirect()->route('backend.category.trash')->with('error', 'Failed to restore category.');
+        }
     }
 }

@@ -40,11 +40,13 @@ Route::prefix('backend/')->name('backend.')->group(function (){
 
 
 Route::get('/backend/category/trash', [CategoryController::class, 'showTrash'])->name('backend.category.trash');
+Route::delete('/category/trash/{category}', [CategoryController::class, 'deleteTrash'])->name('backend.category.deleteTrash');
+Route::get('/category/trash/{category}', [CategoryController::class, 'restoreTrash'])->name('backend.category.restoreTrash');
 
 
 Route::prefix('backend/')->name('backend.')->group(function (){
     Route::resource('category', CategoryController::class)->only([
-        'index','create', 'store', 'update', 'edit', 'destroy', 'show', 
+        'index','create', 'store', 'update', 'edit', 'destroy', 'show', 'deleteTrash' 
     ]);
 });
 
