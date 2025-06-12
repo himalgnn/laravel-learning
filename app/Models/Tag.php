@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Tag extends Model
 {
-    use SoftDeletes;
     //
-    protected $fillable = ['title', 'slug', 'image', 'icon', 'description', 'rank', 'status', 'created_by', 'updated_by'];
-    protected $table = 'categories';
-
+    use SoftDeletes;
+    protected $fillable = ['name','title', 'slug', 'description', 'status', 'created_by', 'updated_by'];
+    protected $table = 'tags';
 
     public function createdBy()
     {
@@ -22,4 +21,4 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'updated_by','id');
     } 
-} 
+}

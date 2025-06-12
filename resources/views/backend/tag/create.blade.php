@@ -1,6 +1,6 @@
 @extends('backend.layout.dashboard_master')
-@section('panel','Category')
-@section('title','Create Category')
+@section('panel','Tag')
+@section('title','Create Tag')
 @section('main-content')
 
     <!--begin::Col-->
@@ -17,29 +17,13 @@
                   <!--begin::Body-->
                   <div class="card-body">
                     @include('backend.includes.flash_message')  
-                    <form enctype="multipart/form-data" action="{{ route('backend.category.store') }}" method="post">
+                    <form enctype="multipart/form-data" action="{{ route('backend.tag.store') }}" method="post">
                         @csrf
-                        @include('backend.includes.input_field',['name' => 'title','title' => 'Category Title'])
+                        @include('backend.includes.input_field',['name' => 'title','title' => 'Tag Title'])
                         @include('backend.includes.input_field',['name' => 'slug','title' => 'Slug'])
                         @include('backend.includes.input_field',['name' => 'description','title' => 'Description'])
-                        @include('backend.includes.input_field',['name' => 'rank','title' => 'Rank'])
                        
-                        <div class="form-group">
-                            <label for="image">Category Image</label>
-                            <input id="image" type="file" name="image_file"
-                                class="form-control"  />
-                            @error('image_file')
-                                <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="icon">Category Icon</label>
-                            <input id="icon" type="file" name="icon_file"
-                                class="form-control"  />
-                            @error('icon_file')
-                                <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
+                        
                         <div class="form-group">
                             <label for="status">Status</label>
                             

@@ -3,22 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Requests\StoreTagRequest;
+use App\Http\Requests\UpdateTagRequest;
+use App\Models\Tag;
+use Illuminate\Http\Request;
 use View;
 
-
-class CategoryController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
-    public $base_route = 'backend.category.';
-    public $base_view = 'backend.category.';
-    public $panel = 'Category';
-    public $base_image_folder = 'category/images';
+    public $base_route = 'backend.tag.';
+    public $base_view = 'backend.tag.';
+    public $panel = 'Tag';
+    public $base_image_folder = 'tag/images';
     public 
      function __construct(){
         View::share('panel', $this->panel);
@@ -28,7 +27,7 @@ class CategoryController extends Controller
     {
         //
         $panel = $this->panel.'';
-        $records = Category::all();
+        $records = Tag::all();
         return view($this->base_view.'index', compact('records'));
     }
 
@@ -44,7 +43,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreTagRequest $request)
     {
         //
         // dd($request->all());
@@ -52,14 +51,14 @@ class CategoryController extends Controller
         $request->request->add(['icon' => 'icon.png']);
         $request->request->add(['created_by' => auth()->user()->id]);
 
-        Category::create($request->all());
+        Tag::create($request->all());
         return redirect()->route($this->base_route.'index')->with('success', $this->panel.' created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Tag $tag)
     {
         //
     }
@@ -67,52 +66,52 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Tag $tag)
     {
         //
         $panel = $this->panel;
-        $record = Category::findOrFail($category->id);
+        $record = Tag::findOrFail($tag->id);
         return view($this->base_route.'edit', compact('panel', 'record'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateTagRequest $request, Tag $tag)
     {
         //
         $request->request->add(['updated_by' => auth()->user()->id]);
-        if ($category->update($request->all())) {
+        if ($tag->update($request->all())) {
             return redirect()->route($this->base_route.'index')->with('success', $this->panel.' updated successfully.');
         } else {
-            return redirect()->route($this->base_route.'index')->with('error', 'Failed to update category.');
+            return redirect()->route($this->base_route.'index')->with('error', 'Failed to update Tag.');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Tag $tag)
     {
         //
        
-        if( ($category -> status = 'Inactive') && $category->delete()){
+        if( ($tag -> status = 'Inactive') && $tag->delete()){
             return redirect()->route($this->base_route.'index')->with('success', $this->panel.' Trashed successfully.');
         } else {
-            return redirect()->route($this->base_route.'index')->with('error', 'Failed to trash category.');
+            return redirect()->route($this->base_route.'index')->with('error', 'Failed to trash Tag.');
         }
     }
 
     public function showTrash(){
         $panel = $this->panel.'';
-        $records = Category::onlyTrashed()->get();
+        $records = Tag::onlyTrashed()->get();
         return view($this->base_route.'trash', compact('panel','records'));
     }
 
     public function deleteTrash($id)
     {
-        $category = Category::withTrashed()->findOrFail($id);
-        if ($category->forceDelete()) {
+        $tag = Tag::withTrashed()->findOrFail($id);
+        if ($tag->forceDelete()) {
             return redirect()->route($this->base_route.'trash')->with('success', $this->panel.' deleted permanently.');
         } else {
             return redirect()->route($this->base_route.'trash')->with('error', 'Failed to delete '.$this->panel.' permanently.');
@@ -121,11 +120,11 @@ class CategoryController extends Controller
 
     public function restoreTrash($id)
     {
-        $category = Category::withTrashed()->findOrFail($id);
-        if ($category->restore()) {
+        $tag = Tag::withTrashed()->findOrFail($id);
+        if ($tag->restore()) {
             return redirect()->route($this->base_route.'trash')->with('success', $this->panel.' restored successfully.');
         } else {
-            return redirect()->route($this->base_route.'trash')->with('error', 'Failed to restore category.');
+            return redirect()->route($this->base_route.'trash')->with('error', 'Failed to restore Tag.');
         }
     }
 }

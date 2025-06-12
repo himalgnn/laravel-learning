@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,14 +39,29 @@ Route::prefix('backend/')->name('backend.')->group(function (){
     ]);
 });
 
-
+//for category trash
 Route::get('/backend/category/trash', [CategoryController::class, 'showTrash'])->name('backend.category.trash');
 Route::delete('/category/trash/{category}', [CategoryController::class, 'deleteTrash'])->name('backend.category.deleteTrash');
 Route::get('/category/trash/{category}', [CategoryController::class, 'restoreTrash'])->name('backend.category.restoreTrash');
 
 
+//for category
 Route::prefix('backend/')->name('backend.')->group(function (){
     Route::resource('category', CategoryController::class)->only([
+        'index','create', 'store', 'update', 'edit', 'destroy', 'show', 'deleteTrash' 
+    ]);
+});
+
+
+//for tag trash
+Route::get('/backend/tag/trash', [TagController::class, 'showTrash'])->name('backend.tag.trash');
+Route::delete('/tag/trash/{tag}', [TagController::class, 'deleteTrash'])->name('backend.tag.deleteTrash');
+Route::get('/tag/trash/{tag}', [TagController::class, 'restoreTrash'])->name('backend.tag.restoreTrash');
+
+
+//for tag
+Route::prefix('backend/')->name('backend.')->group(function (){
+    Route::resource('tag', TagController::class)->only([
         'index','create', 'store', 'update', 'edit', 'destroy', 'show', 'deleteTrash' 
     ]);
 });

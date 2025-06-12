@@ -273,36 +273,68 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('backend.category.create') }}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-box-seam-fill"></i>
                   <p>
                     Categories
-                    <!-- <i class="nav-arrow bi bi-chevron-right"></i>
-                    <span class="nav-badge badge text-bg-secondary me-3">6</span> -->
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                    <!-- <span class="nav-badge badge text-bg-secondary me-3">6</span> -->
 
                   </p>
                 </a>
-                <!-- <ul class="nav nav-treeview">
+                <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./widgets/small-box.html" class="nav-link">
+                    <a href="{{ route('backend.category.create') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Small Box</p>
+                      <p>Create Category</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./widgets/info-box.html" class="nav-link">
+                    <a href="{{ route('backend.category.index') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>info Box</p>
+                      <p>List Categories</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./widgets/cards.html" class="nav-link">
+                    <a href="{{ route('backend.category.trash') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Cards</p>
+                      <p>Categories Trash</p>
                     </a>
                   </li>
-                </ul> -->
+                </ul>
               </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-box-seam-fill"></i>
+                  <p>
+                    Tags
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                    <!-- <span class="nav-badge badge text-bg-secondary me-3">6</span> -->
+
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('backend.tag.create') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Create Tag</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('backend.tag.index') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>List Tag</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('backend.tag.trash') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Tag Trash</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon bi bi-clipboard-fill"></i>

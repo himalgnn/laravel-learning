@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class StoreTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,9 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             //
-            'title'=> 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories,slug',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:tags,slug',
             'description' => 'nullable|string|max:1000',
-            'rank'=> 'nullable|integer|min:0',
             'status' => 'required|in:1,0',
         ];
     }
